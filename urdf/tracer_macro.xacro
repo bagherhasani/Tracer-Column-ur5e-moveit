@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="tracer_v1">
+    <!-- Include original tracer_v1 content -->
+    <xacro:include filename="$(find tracer_description)/urdf/tracer_v1.xacro"/>
+  </xacro:macro>
+</robot>

@@ -1,0 +1,16 @@
+<launch>
+  <!-- Specify the path to your xacro file -->
+  <arg name="model" default="$(find tracer_ur5e_assembly)/urdf/full_tracer.xacro" />
+
+  <!-- Process the xacro file and load it as robot_description -->
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+
+  <!-- Launch the Joint State Publisher (for simulation of joint states) -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+  <!-- Launch the Robot State Publisher to publish TFs -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!-- Launch RViz for visualization; adjust the RViz configuration file as needed -->
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tracer_ur5e_assembly)/rviz/tracer_ur5e_mobile_manipulator.rviz" /> -->
+</launch>

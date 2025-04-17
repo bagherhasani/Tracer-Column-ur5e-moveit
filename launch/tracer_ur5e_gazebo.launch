@@ -1,0 +1,37 @@
+<launch>
+  <!-- Gazebo parameters -->
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+
+  <!-- Start Gazebo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <!-- Load combined robot -->
+<param name="robot_description" 
+       command="$(find xacro)/xacro '$(find tracer_ur5e_assembly)/urdf/full_tracer.xacro'"/>
+  <!-- Spawn robot -->
+  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -param robot_description -model tracer_ur5e -z 0.5"
+        output="screen"/>
+
+  <!-- Load controllers -->
+  <arg name="controller_config_file" default="$(find ur_gazebo)/config/ur5e_controllers.yaml" doc="Config file used for defining the ROS-Control controllers."/>
+  <arg name="controllers" default="joint_state_controller eff_joint_traj_controller" doc="Controllers that are activated by default."/>
+  <arg name="stopped_controllers" default="joint_group_eff_controller" doc="Controllers that are initally loaded, but not started."/>
+
+<rosparam file="$(find tracer_gazebo_sim)/config/tracer_v1_control.yaml" command="load"/>
+
+  <!-- <include file="$(find tracer_controller)/launch/tracer_controller.launch"/> -->
+  <!-- <include file="$(find ur_gazebo)/launch/ur5e_controllers.launch"/> -->
+
+  <!-- Start MoveIt -->
+  <!-- <include file="$(find ur5e_moveit_config)/launch/move_group.launch"> -->
+    <!-- <arg name="allow_trajectory_execution" value="true"/> -->
+  <!-- </include> -->
+
+  <!-- RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tracer_ur5e_assembly)/config/combined.rviz"/>
+</launch>

@@ -1,0 +1,24 @@
+controller_list:
+  - name: fake_mobile_tracer_ur5_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - fl_castor_wheel
+      - fl_wheel
+      - fr_castor_wheel
+      - fr_wheel
+      - left_wheel
+      - right_wheel
+      - rl_castor_wheel
+      - rl_wheel
+      - rr_castor_wheel
+      - rr_wheel
+      - vention_column_prismatic_joint
+      - ur5_shoulder_pan_joint
+      - ur5_shoulder_lift_joint
+      - ur5_elbow_joint
+      - ur5_wrist_1_joint
+      - ur5_wrist_2_joint
+      - ur5_wrist_3_joint
+initial:  # Define initial robot poses per group
+  - group: mobile_tracer_ur5
+    pose: up

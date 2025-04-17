@@ -1,0 +1,25 @@
+# Tracer Controllers
+tracer_velocity_controller:
+  type: skid_steer_drive_controller/SkidSteerDriveController
+  left_wheel: ['fl_wheel_joint', 'rl_wheel_joint']   # Front-Left and Rear-Left
+  right_wheel: ['fr_wheel_joint', 'rr_wheel_joint']  # Front-Right and Rear-Right
+  wheel_separation: 0.37910  # From your tracer_v1.xacro
+  wheel_radius: 0.16         # From your tracer_v1.xacro
+
+# UR5e Joint Controllers (same as before)
+arm_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - shoulder_pan_joint
+    - shoulder_lift_joint
+    - elbow_joint
+    - wrist_1_joint
+    - wrist_2_joint
+    - wrist_3_joint
+  gains: 
+    shoulder_pan_joint: {p: 1000, i: 0, d: 0}
+    shoulder_lift_joint: {p: 1000, i: 0, d: 0}
+    elbow_joint: {p: 1000, i: 0, d: 0}
+    wrist_1_joint: {p: 1000, i: 0, d: 0}
+    wrist_2_joint: {p: 1000, i: 0, d: 0}
+    wrist_3_joint: {p: 1000, i: 0, d: 0}

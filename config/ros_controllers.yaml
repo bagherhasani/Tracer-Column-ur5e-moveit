@@ -1,0 +1,106 @@
+mobile_tracer_ur5_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - fl_castor_wheel
+    - fl_wheel
+    - fr_castor_wheel
+    - fr_wheel
+    - left_wheel
+    - right_wheel
+    - rl_castor_wheel
+    - rl_wheel
+    - rr_castor_wheel
+    - rr_wheel
+    - vention_column_prismatic_joint
+    - ur5_shoulder_pan_joint
+    - ur5_shoulder_lift_joint
+    - ur5_elbow_joint
+    - ur5_wrist_1_joint
+    - ur5_wrist_2_joint
+    - ur5_wrist_3_joint
+  gains:
+    fl_castor_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    fl_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    fr_castor_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    fr_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    left_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    right_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    rl_castor_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    rl_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    rr_castor_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    rr_wheel:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    vention_column_prismatic_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    ur5_shoulder_pan_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    ur5_shoulder_lift_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    ur5_elbow_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    ur5_wrist_1_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    ur5_wrist_2_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    ur5_wrist_3_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1

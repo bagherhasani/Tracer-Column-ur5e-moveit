@@ -1,0 +1,13 @@
+# Combined controller configuration
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    tracer_velocity_controller:
+      type: diff_drive_controller/DiffDriveController
+
+    arm_controller:
+      type: position_controllers/JointTrajectoryController
