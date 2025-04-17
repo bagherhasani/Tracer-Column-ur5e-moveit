@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- The planning and execution launch file for the combined system -->
+  
+  <!-- Load robot description from URDF -->
+  <param name="robot_description" command="$(find xacro)/xacro $(find tracer_ur5e_assembly)/urdf/column.xacro" />
+  
+  <!-- Load the SRDF -->
+  <param name="robot_description_semantic" textfile="$(find tracer_ur5e_moveit_config)/config/tracer_ur5e.srdf" />
+  
+  <!-- Load updated joint limits (override joint limits in URDF) -->
+  <group ns="robot_description_planning">
+    <rosparam command="load" file="$(find tracer_ur5e_moveit_config)/config/joint_limits.yaml"/>
+  </group>
+  
+  <!-- Load kinematics.yaml -->
+  <group ns="robot_description_kinematics">
+    <rosparam command="load" file="$(find tracer_ur5e_moveit_config)/config/kinematics.yaml"/>
+  </group>
+  
+  <!-- Start the move_group node -->
+  <node name="move_group" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen">
+    <!-- Set the display level for MoveGroup -->
+    <param name="allow_trajectory_execution" value="true"/>
+    <param name="max_safe_path_cost" value="1"/>
+    <param name="jiggle_fraction" value="0.05" />
+    
+    <!-- MoveGroup capabilities to load -->
+    <param name="capabilities" value="move_group/MoveGroupCartesianPathService
+                                      move_group/MoveGroupExecuteTrajectoryAction
+                                      move_group/MoveGroupKinematicsService
+                                      move_group/MoveGroupMoveAction
+                                      move_group/MoveGroupPickPlaceAction
+                                      move_group/MoveGroupPlanService
+                                      move_group/MoveGroupQueryPlannersService
+                                      move_group/MoveGroupStateValidationService
+                                      move_group/MoveGroupGetPlanningSceneService
+                                      move_group/ApplyPlanningSceneService
+                                      move_group/ClearOctomapService" />
+    
+    <!-- Publish planning requests -->
+    <param name="planning_scene_monitor/publish_planning_scene" value="true" />
+    <param name="planning_scene_monitor/publish_geometry_updates" value="true" />
+    <param name="planning_scene_monitor/publish_state_updates" value="true" />
+    <param name="planning_scene_monitor/publish_transforms_updates" value="true" />
+  </node>
+  
+  <!-- Run RViz with MoveIt configuration -->
+  <include file="$(find tracer_ur5e_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="config" value="true"/>
+  </include>
+  
+  <!-- Start joint state publisher -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  
+  <!-- Start robot state publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+</launch> 

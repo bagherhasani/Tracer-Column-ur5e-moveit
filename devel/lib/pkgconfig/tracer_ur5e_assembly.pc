@@ -1,0 +1,8 @@
+prefix=/home/baqer/tracer_ur5_ws/devel
+
+Name: tracer_ur5e_assembly
+Description: Description of tracer_ur5e_assembly
+Version: 0.3.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

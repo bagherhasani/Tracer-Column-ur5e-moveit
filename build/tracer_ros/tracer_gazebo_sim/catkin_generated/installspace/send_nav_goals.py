@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+
+import rospy
+import actionlib
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from geometry_msgs.msg import Quaternion
+from tf.transformations import quaternion_from_euler
+import math
+
+def movebase_client(x, y, theta):
+    """
+    Send a navigation goal to the robot
+    :param x: x coordinate in the map frame
+    :param y: y coordinate in the map frame
+    :param theta: orientation in radians
+    """
+    client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+    client.wait_for_server()
+    
+    goal = MoveBaseGoal()
+    goal.target_pose.header.frame_id = "map"
+    goal.target_pose.header.stamp = rospy.Time.now()
+    goal.target_pose.pose.position.x = x
+    goal.target_pose.pose.position.y = y
+    
+    # Convert Euler angle to quaternion
+    q = quaternion_from_euler(0, 0, theta)
+    goal.target_pose.pose.orientation = Quaternion(*q)
+    
+    client.send_goal(goal)
+    wait = client.wait_for_result()
+    
+    if not wait:
+        rospy.logerr("Action server not available!")
+        return False
+    else:
+        return client.get_result()
+
+if __name__ == '__main__':
+    try:
+        rospy.init_node('movebase_client_py')
+        
+        # Define a list of waypoints (x, y, theta)
+        waypoints = [
+            (1.0, 1.0, 0.0),     # Example waypoint 1
+            (2.0, -1.0, math.pi/2),  # Example waypoint 2
+            (0.0, 0.0, math.pi)   # Example waypoint 3 (return to start)
+        ]
+        
+        # Send the robot to each waypoint in sequence
+        for wp_idx, waypoint in enumerate(waypoints):
+            x, y, theta = waypoint
+            rospy.loginfo(f"Sending goal {wp_idx+1}/{len(waypoints)}: x={x}, y={y}, theta={theta}")
+            
+            result = movebase_client(x, y, theta)
+            if result:
+                rospy.loginfo(f"Goal {wp_idx+1} reached!")
+            else:
+                rospy.logwarn(f"Failed to reach goal {wp_idx+1}")
+        
+        rospy.loginfo("All waypoints completed!")
+        
+    except rospy.ROSInterruptException:
+        rospy.loginfo("Navigation test finished.") 

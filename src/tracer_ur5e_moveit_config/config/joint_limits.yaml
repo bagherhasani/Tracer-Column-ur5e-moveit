@@ -1,0 +1,51 @@
+joint_limits:
+  # UR5e arm joints
+  ur5_shoulder_pan_joint:
+    has_velocity_limits: true
+    max_velocity: 3.14
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  ur5_shoulder_lift_joint:
+    has_velocity_limits: true
+    max_velocity: 3.14
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  ur5_elbow_joint:
+    has_velocity_limits: true
+    max_velocity: 3.14
+    has_acceleration_limits: true
+    max_acceleration: 3.14
+  ur5_wrist_1_joint:
+    has_velocity_limits: true
+    max_velocity: 6.28
+    has_acceleration_limits: true
+    max_acceleration: 6.28
+  ur5_wrist_2_joint:
+    has_velocity_limits: true
+    max_velocity: 6.28
+    has_acceleration_limits: true
+    max_acceleration: 6.28
+  ur5_wrist_3_joint:
+    has_velocity_limits: true
+    max_velocity: 6.28
+    has_acceleration_limits: true
+    max_acceleration: 6.28
+    
+  # Column joint
+  vention_column_prismatic_joint:
+    has_velocity_limits: true
+    max_velocity: 0.1
+    has_acceleration_limits: true
+    max_acceleration: 0.2
+    
+  # Wheels
+  right_wheel:
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 2.0
+  left_wheel:
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 2.0 

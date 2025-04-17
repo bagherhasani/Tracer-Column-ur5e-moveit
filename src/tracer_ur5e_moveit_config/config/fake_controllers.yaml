@@ -1,0 +1,27 @@
+controller_list:
+  - name: fake_ur5_arm_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - ur5_shoulder_pan_joint
+      - ur5_shoulder_lift_joint
+      - ur5_elbow_joint
+      - ur5_wrist_1_joint
+      - ur5_wrist_2_joint
+      - ur5_wrist_3_joint
+      
+  - name: fake_column_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - vention_column_prismatic_joint
+      
+  - name: fake_base_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - right_wheel
+      - left_wheel
+      
+initial:
+  - group: ur5_arm
+    pose: home
+  - group: column
+    pose: column_down 

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- This is just a test launch file -->
+  <node name="test_node" pkg="rospy" type="rostopic" args="echo /rosout" output="screen"/>
+</launch> 

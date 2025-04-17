@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<robot name="tracer_ur5_with_column">
+    <!-- UR5e arm group -->
+    <group name="ur5_arm">
+        <chain base_link="ur5_base_link" tip_link="ur5_tool0"/>
+    </group>
+    
+    <!-- Column group (for controlling the height) -->
+    <group name="column">
+        <joint name="vention_column_prismatic_joint"/>
+    </group>
+    
+    <!-- Entire system group for coordinated motion -->
+    <group name="tracer_ur5e_system">
+        <group name="ur5_arm"/>
+        <group name="column"/>
+        <!-- Unable to directly plan for non-holonomic mobile base, just include the joints -->
+        <joint name="right_wheel"/>
+        <joint name="left_wheel"/>
+    </group>
+    
+    <!-- Set end effector -->
+    <end_effector name="ur5_ee" parent_link="ur5_tool0" group="ur5_arm"/>
+    
+    <!-- Define virtual joint for mobile base movement -->
+    <virtual_joint name="world_to_base" type="planar" parent_frame="world" child_link="base_link"/>
+    
+    <!-- Define default poses -->
+    <group_state name="home" group="ur5_arm">
+        <joint name="ur5_elbow_joint" value="0"/>
+        <joint name="ur5_shoulder_lift_joint" value="-1.5707"/>
+        <joint name="ur5_shoulder_pan_joint" value="0"/>
+        <joint name="ur5_wrist_1_joint" value="-1.5707"/>
+        <joint name="ur5_wrist_2_joint" value="0"/>
+        <joint name="ur5_wrist_3_joint" value="0"/>
+    </group_state>
+    
+    <group_state name="column_down" group="column">
+        <joint name="vention_column_prismatic_joint" value="0"/>
+    </group_state>
+    
+    <group_state name="column_up" group="column">
+        <joint name="vention_column_prismatic_joint" value="0.2"/>
+    </group_state>
+    
+    <!-- Define disabled collisions -->
+    <disable_collisions link1="base_link" link2="vention_column_bottom_link" reason="Adjacent"/>
+    <disable_collisions link1="vention_column_bottom_link" link2="vention_column_top_link" reason="Adjacent"/>
+    <disable_collisions link1="vention_column_top_link" link2="ur5_base_link" reason="Adjacent"/>
+    <disable_collisions link1="ur5_base_link" link2="ur5_shoulder_link" reason="Adjacent"/>
+    <disable_collisions link1="ur5_shoulder_link" link2="ur5_upper_arm_link" reason="Adjacent"/>
+    <disable_collisions link1="ur5_upper_arm_link" link2="ur5_forearm_link" reason="Adjacent"/>
+    <disable_collisions link1="ur5_forearm_link" link2="ur5_wrist_1_link" reason="Adjacent"/>
+    <disable_collisions link1="ur5_wrist_1_link" link2="ur5_wrist_2_link" reason="Adjacent"/>
+    <disable_collisions link1="ur5_wrist_2_link" link2="ur5_wrist_3_link" reason="Adjacent"/>
+    <!-- Add more disable_collisions as needed -->
+    
+</robot> 

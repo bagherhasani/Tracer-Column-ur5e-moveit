@@ -1,0 +1,29 @@
+controller_list:
+  - name: ur5_arm_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - ur5_shoulder_pan_joint
+      - ur5_shoulder_lift_joint
+      - ur5_elbow_joint
+      - ur5_wrist_1_joint
+      - ur5_wrist_2_joint
+      - ur5_wrist_3_joint
+      
+  - name: column_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - vention_column_prismatic_joint
+      
+  # Base mobility is typically handled separately through a different navigation system
+  # But we can define a basic controller for testing purposes
+  - name: base_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - right_wheel
+      - left_wheel 

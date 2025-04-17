@@ -1,0 +1,8 @@
+prefix=/home/baqer/tracer_ur5_ws/install
+
+Name: tracer_navigation
+Description: Description of tracer_navigation
+Version: 0.0.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy std_msgs nav_msgs tf move_base amcl map_server
